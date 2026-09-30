@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger - Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    
+    <!-- ====== HEADER ====== -->
+     <header class="site-header">
+        <h1 class="site-title">Ledger</h1>
+        <p class="site-tagline">One list. No clutter. Just what needs doing.</p>
+     </header>
+
+     <!-- ====== ADD TODO FORM ====== -->
+      <section class="add-todo-section">
+        <form class="add-todo-form" action="{{ url_for('add_todo') }}" method="POST">
+            <input type="text" name="title" placeholder="Todo title ..." required />
+            <textarea name="description" placeholder="Short description (optional)" rows="2"></textarea>
+            <button type="submit" class="btn-add">Add Todo</button>
+        </form>
+      </section>
+
+      <!-- ====== ACTIVE TODOS ====== -->
+       <main class="todo-main">
+        <section class="todo-section todo-section-active">
+            <h2 class="section-title">To Do</h2>
+            <div class="todo-list">
+                {% for todo in active_todos %}
+                <article class="todo-card">
+                    <div class="todo-content">
+                        <h3 class="todo-title">{{ todo.title }}</h3>
+                        {% if todo.description %}
+                        <p class="todo-description">{{ todo.description }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="todo-actions">
+                        <form action="{{ url_for('complete_todo', title=todo.title) }}" method="POST">
+                            <button type="submit" class="btn-complete">✓ Done</button>
+                        </form>
+                        <form action="{{ url_for('delete_todo', title=todo.title) }}" method="POST">
+                            <button type="submit" class="btn-delete">✕</button>
+                        </form>
+                    </div>
+                </article>
+                {% else %}
+                <p class="empty-state">Nothing on your plate right now.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ====== COMPLETED TODOS ====== -->
+         <section class="todo-section todo-section-completed">
+            <h2 class="section-title">Completed</h2>
+            <div class="todo-list">
+                {% for todo in completed_todos %}
+                <article class="todo-card completed">
+                    <div class="todo-content">
+                        <h3 class="todo-title">{{ todo.title }}</h3>
+                        {% if todo.description %}
+                        <p class="todo-description">{{ todo.description }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="todo-actions">
+                        <form action="{{ url_for('delete_todo', title=todo.title) }}" method="POST">
+                            <button type="submit" class="btn-delete">✕</button>
+                        </form>
+                    </div>
+                </article>
+                {% else %}
+                <p class="empty-state">Nothing completed yet.</p>
+                {% endfor %}
+            </div>
+         </section>
+       </main>
+
+</body>
+</html>
