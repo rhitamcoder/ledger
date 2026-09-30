@@ -1,0 +1,242 @@
+/* ============ CSS VARIABLES (Theme) ============ */
+:root {
+  --bg: #0B0E14;
+  --surface: #131720;
+  --surface-hover: #1C222E;
+  --text-primary: #E4E7EC;
+  --text-muted: #8B93A7;
+  --accent: #6EE7B7;
+  --accent-dark: #3FA57F;
+  --danger: #E4677A;
+
+  --font-heading: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ============ RESET ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+/* ============ HEADER ============ */
+.site-header {
+  text-align: center;
+  padding: 3.5rem 2rem 1.5rem;
+}
+
+.site-title {
+  font-size: 2.4rem;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.site-tagline {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ============ ADD TODO FORM ============ */
+.add-todo-section {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.add-todo-form {
+  background-color: var(--surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.add-todo-form input,
+.add-todo-form textarea {
+  background-color: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.add-todo-form input:focus,
+.add-todo-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn-add {
+  background-color: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: var(--accent-dark);
+}
+
+/* ============ TODO SECTIONS ============ */
+.todo-main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.todo-section-completed {
+  order: 1;
+  text-align: right;
+}
+
+.todo-section-active {
+  order: 2;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ============ TODO CARD ============ */
+.todo-card {
+  background-color: var(--surface);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.todo-card:hover {
+  background-color: var(--surface-hover);
+  transform: translateX(2px);
+}
+
+.todo-card.completed {
+  opacity: 0.6;
+}
+
+.todo-card.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-title {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.todo-description {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-complete,
+.btn-delete {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-complete {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-complete:hover {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn-delete {
+  background-color: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn-delete:hover {
+  background-color: var(--danger);
+  color: var(--bg);
+}
+
+/* ============ RESPONSIVE (Mobile) ============ */
+@media (max-width: 700px) {
+  .site-header {
+    padding: 2.5rem 1.5rem 1rem;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .todo-main {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .todo-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todo-actions {
+    justify-content: flex-end;
+  }
+}
